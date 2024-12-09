@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import pandas as pd
 
 kompas_100_ticker = [
   "ABMM", "BNGA", "GOTO", "MBMA", "SIDO",
@@ -95,5 +96,14 @@ def get_date():
 
     return data
 
-print(get_stock_price_data('BBCA'))
 
+master_data = {}
+
+master_data['date'] = get_date()
+
+for ticker in kompas_100_ticker:
+    master_data[ticker] = get_stock_price_data(ticker)
+
+df = pd.DataFrame(master_data)
+
+df.to_csv('kompas100_stock_price.csv', index=False)
