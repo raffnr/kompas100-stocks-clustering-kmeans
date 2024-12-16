@@ -65,6 +65,7 @@ def get_stock_price_data (ticker):
 
                 final_closing_price = ''.join(final_closing_price)
 
+                # Konversi string menjadi integer
                 data.append(int(final_closing_price))
         
         return data
@@ -105,5 +106,7 @@ for ticker in kompas_100_ticker:
     master_data[ticker] = get_stock_price_data(ticker)
 
 df = pd.DataFrame(master_data)
+
+print(df)
 
 df.to_csv('kompas100_stock_price.csv', index=False)
